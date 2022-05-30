@@ -15,7 +15,7 @@ from gensim.utils import simple_preprocess
 from gensim import models, corpora
 import numpy as np
 import itertools
-import igraph as ig
+import networkx as nx
 from typing import *
 
 """Netpro2vec base class."""
@@ -72,7 +72,7 @@ class Netpro2vec:
 		self.verbose = verbose
 		self.tqdm = tqdm if self.verbose else utils.nop
 
-	def fit(self, graphs: List[ig.Graph]):
+	def fit(self, graphs):
 		"""Fitting the model."""
 		self.format = format
 		self.num_graphs = len(graphs)
@@ -90,7 +90,7 @@ class Netpro2vec:
 		r"""Getting the membership dictionary."""
 		return np.array(self.document_collections_list[-1])
 
-	def __generate_probabilities(self, graphs: List[ig.Graph]):
+	def __generate_probabilities(self, graphs):
 		for prob_type in self.prob_type:
 			self.probmats[prob_type] = DistributionGenerator(prob_type, graphs,verbose=self.verbose).get_distributions()
 
