@@ -1,11 +1,11 @@
 from setuptools import setup
 
  setup(
-   name='netpro2vec',
+   name='Netpro2vec_nx',
    version='0.1.0',
    author='Maurizio Giordano',
    author_email='maurizio.giordano@icar.cnr.it',
-   packages=['package_name', 'package_name.test'],
+   packages=['netpro2vec'],
    #scripts=['bin/script1','bin/script2'],
    #url='http://pypi.python.org/pypi/PackageName/',
    license='LICENSE.txt',
