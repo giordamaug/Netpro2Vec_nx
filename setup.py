@@ -1,7 +1,7 @@
 from setuptools import setup
 
  setup(
-   name='Netpro2Vec_nx',
+   name='netpro2vec',
    version='0.1.0',
    author='Maurizio Giordano',
    author_email='maurizio.giordano@icar.cnr.it',
