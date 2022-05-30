@@ -19,6 +19,7 @@ import itertools
 from typing import *
 import os
 import pickle as pk
+import networkx as nx
 
 """
 Netrpo2vec.py
@@ -327,8 +328,9 @@ class Netpro2vec:
 		return document_collections
 
 	def get_vertex_attributes(self, graphs):
-		if self.vertex_attribute in graphs[0].vs.attributes():
-			self.vertex_attribute_list = [graphs[x].vs[self.vertex_attribute] for x in range(0, len(graphs))]
+		node_attributes = list(set(itertools.chain.from_iterable(d.keys() for *_, d in graphs[0].nodes(data=True))))
+		if self.vertex_attribute in node_attributes:
+			self.vertex_attribute_list = [list(nx.get_node_attributes(graphs[x], self.vertex_attribute).values()) for x in range(0, len(graphs))]
 		else:
 			raise Exception('The graph does not have the provided vertex '
 							'attribute in -A! ')
