@@ -1,6 +1,6 @@
 from setuptools import setup
 
- setup(
+setup(
    name='Netpro2vec_nx',
    version='0.1.0',
    author='Maurizio Giordano',
