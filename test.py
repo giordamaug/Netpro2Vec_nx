@@ -1,10 +1,12 @@
+import networkx as nx
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
-import igraph as ig
 import argparse
 import sys,os
 import time
+import sys
+sys.path.append('.')
 from netpro2vec.Netpro2vec import Netpro2vec
 from netpro2vec import utils
 import tqdm
@@ -44,7 +46,7 @@ def load_graphs(input_path, dataname, labels, fmt='graphml',verbose=False):
 		graph_list = []
 		targets = []
 		for f in _tqdm(filenames):
-			graph_list.append(ig.load(os.path.join(input_path, f),format=fmt))
+			graph_list.append(nx.read_graphml(os.path.join(input_path, f)))
 			targets += [labels[f.split('.')[0]]]
 		y = np.array(targets)
 		return graph_list,y 
