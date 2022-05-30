@@ -1,14 +1,13 @@
-# @Time    : 13/08/2020 14:16
-# @Email   : ichcha.manipur@gmail.com
+# @Time    : 13/06/2022
+# @Author  : Maurizio Giordano and Ichcha Manipur
+# @Email   : maurizio.giordano@cnr.it, oichcha.manipur@gmail.com
 # @File    : DistributionGenerator.py
 
-import igraph
-import os
 import numpy as np
 from tqdm import tqdm
 from scipy.sparse import csr_matrix
 import pandas as pd
-import igraph as ig
+import networkx as nx
 from typing import *
 import re
 from . import utils
@@ -18,7 +17,7 @@ class DistributionGenerator:
 	Generator class for Node distance distribution and Transition probability
 	matrices
 	"""
-	def __init__(self, distrib_type, graphs: List[ig.Graph],common_bin_list=True,verbose=False):
+	def __init__(self, distrib_type, graphs,common_bin_list=True,verbose=False):
 		self.verbose=verbose
 		self.tqdm = tqdm if self.verbose else utils.nop
 		self.distrib_type = distrib_type
@@ -33,24 +32,20 @@ class DistributionGenerator:
 		return self.distrib_list
 
 	def __get_bins(self):
-		max_diam = max([g.diameter() for g in self.graph_list])
+		max_diam = max([nx.diameter(g) for g in self.graph_list])
 		self.bin_list = np.append(np.arange(0, max_diam + 1), float('inf'))
 
 	def __get_node_distance_distr(self, g):
 		if self.bin_list is None:
-			self.bin_list = np.append(np.arange(0, g.diameter() + 1), float(
+			self.bin_list = np.append(np.arange(0, nx.diameter(g) + 1), float(
 				'inf'))
 
-		if g.is_directed():
-			mode_g = "OUT"
-		else:
-			mode_g = "ALL"
-		num_nodes = g.vcount()
+		num_nodes = g.number_of_nodes()
 		# Find node-wise distances and their histogram
-		if g.is_weighted():
-			d = g.shortest_paths_dijkstra(mode=mode_g, weights='weight')
+		if nx.is_weighted(g):
+			d = [[b for a,b in sorted(sp[1].items())] for sp in nx.shortest_path_length(g, weights='weight')]
 		else:
-			d = g.shortest_paths_dijkstra(mode=mode_g)
+			d = [[b for a,b in sorted(sp[1].items())] for sp in nx.shortest_path_length(g)]
 		h_g = np.array([np.histogram(d[x], bins=self.bin_list)[0] for x in
 						range(0, num_nodes)])  # s.transpose()
 		distrib_mat = h_g / (num_nodes - 1)
@@ -64,28 +59,29 @@ class DistributionGenerator:
 			mode_g = "ALL"
 		if walk == 1:
 			# find 1 walk transition matrix
-			if g.is_weighted():
-				adj_g = g.get_adjacency(attribute='weight')
+			if nx.is_weighted(g):
+				adj_g = nx.adjacency_matrix(g,weight='weight').todense()
 			else:
-				adj_g = g.get_adjacency()
+				adj_g = nx.adjacency_matrix(g).todense()
 			adj_g = np.array(adj_g.data)
 			dw = adj_g.sum(axis=0)
 			dw[dw == 0] = 1
 			distrib_mat = adj_g / dw
 		else:
 			# find Transition matrices > 1 walk
-			d = g.shortest_paths_dijkstra(mode=mode_g)
-			ego_out = g.neighborhood(vertices=g.vs, order=walk,
-									 mode=mode_g,
-									 mindist=walk)
+			if nx.is_weighted(g):
+				d = [[b for a,b in sorted(sp[1].items())] for sp in nx.shortest_path_length(g, weights='weight')]
+			else:
+				d = [[b for a,b in sorted(sp[1].items())] for sp in nx.shortest_path_length(g)]
 			# ego(g, order = walk, nodes = V(g), mindist = walk, mode = mode_g)
-			num_nodes = g.vcount()
+			num_nodes = g.number_of_nodes()
 			walk_distances = np.zeros((num_nodes, num_nodes))
 
 			# find vertices for the specified walk parameter by indexing the
 			# distances matrix by using the ego indices (ego_out)
-			for i in range(num_nodes):
-				for node in ego_out[i]:
+			for i in g.nodes():
+				ego = nx.ego_graph(g,i,radius=walk, undirected=nx.is_undirected(g), distance=walk)
+				for node in ego:
 					walk_distances[i, node] = d[i][node]
 			dw = walk_distances.sum(axis=0)
 			dw[dw == 0] = 1
