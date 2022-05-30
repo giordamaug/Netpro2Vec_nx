@@ -1,6 +1,6 @@
-# @Time    : 08/09/2020 09:09
-# @Author  : Ichcha Manipur
-# @Email   : ichcha.manipur@gmail.com
+# @Time    : 13/06/2022
+# @Author  : Maurizio Giordano and Ichcha Manipur
+# @Email   : maurizio.giordano@cnr.it, oichcha.manipur@gmail.com
 # @File    : Netprob2vecmulti.py
 
 from tqdm import tqdm
@@ -15,7 +15,6 @@ from gensim.utils import simple_preprocess
 from gensim import models, corpora
 import numpy as np
 import itertools
-import networkx as nx
 from typing import *
 
 """Netpro2vec base class."""
@@ -191,5 +190,5 @@ class Netpro2vec:
 						alpha=learning_rate,
 						seed=self.randomseed)
 		utils.vprint("Done!", verbose=self.verbose)
-		self.embedding = model.docvecs.doctag_syn0
+		self.embedding = model.docvecs.vectors
 
