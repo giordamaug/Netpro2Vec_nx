@@ -48,7 +48,7 @@ class DistributionGenerator:
 		h_g = np.array([np.histogram(d[x], bins=self.bin_list)[0] for x in
 						range(0, num_nodes)])  # s.transpose()
 		distrib_mat = h_g / (num_nodes - 1)
-		self.distrib_list.append(csr_matrix(distrib_mat))
+		self.distrib_list.append(distrib_mat)
 
 	def __get_transition_matrix(self, g, walk=1):
 
@@ -88,7 +88,7 @@ class DistributionGenerator:
 			# matrix
 			distrib_mat = walk_distances / dw
 		distrib_mat = distrib_mat.T
-		self.distrib_list.append(csr_matrix(distrib_mat))
+		self.distrib_list.append(distrib_mat)
 
 	def __run_distib_comp(self):
 		#print(self.distrib_type)
