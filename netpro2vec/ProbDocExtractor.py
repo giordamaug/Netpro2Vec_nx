@@ -44,8 +44,7 @@ class ProbDocExtractor:
 		for weights with stat data like correlation or p-values - To be tested).
 		"""
 
-		probability_distrib_matrix = np.fliplr(np.argsort(
-			self.probability_distrib_matrix, axis=1))
+		probability_distrib_matrix = np.fliplr(np.argsort(self.probability_distrib_matrix, axis=1))
 		features_graph = probability_distrib_matrix.tolist()
 		cut = (self.probability_distrib_matrix > 0).sum(axis=1)
 		self.features_graph = [features_graph[i][0:cut[i]] for i in range(0,
