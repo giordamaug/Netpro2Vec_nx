@@ -84,7 +84,7 @@ class Netpro2Vec:
         **load_vocab *(bool, optional)*: flag to enable vocabulary restoring. Default is False
     """
 
-	def __init__(self, format="graphml", dimensions=128, prob_type: List[str]=["tm1"], 
+	def __init__(self, format="graphml", dimensions=128, prob_type: List[str]=["ndd"], 
 		         extractor=[1],cut_off=[0.01], agg_by=[0],
 		         min_count=5, down_sampling=0.0001,workers=4, epochs=10, learning_rate=0.025, 
 				 remove_inf=False, vertex_attribute=None, seed=0,
