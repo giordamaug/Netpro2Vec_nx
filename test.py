@@ -33,7 +33,7 @@ parser.add_argument('-v', "--verbose", help="enable verobose printing (default d
 parser.add_argument('-D', "--dump", help="enable embedding save (default disabled)", action='store_true')
 parser.add_argument('-L', "--load", help="enable embedding load (default disabled)", action='store_true')
 parser.add_argument('-p', "--label-position", dest='label_position', metavar='<label-position>', type=int, help='label position (default 2)', default=2, required=False)
-parser.add_argument('-d', "--dimensions", metavar='<dimensions>', type=int, help='feature dimension (default 128)', default=128, required=False)
+parser.add_argument('-d', "--dimension", metavar='<dimension>', type=int, help='feature dimension (default 128)', default=128, required=False)
 parser.add_argument('-x', "--extension", metavar="<extension>", type=str, default='graphml',choices=['graphml', 'edgelist'], help="file format (graphml, edgelist)) ", required=False)
 
 
@@ -74,7 +74,7 @@ def main(args):
         tm1 = time.time()
         if args.verbose: print("Embeddings...")
         tm2 = time.time()
-        model = Netpro2Vec(dimensions=512, extractor=args.extractors,prob_type=args.distributions,
+        model = Netpro2Vec(dimensions=args.dimension, extractor=args.extractors,prob_type=args.distributions,
 				      cut_off=args.cutoffs, agg_by=args.aggregators,verbose=args.verbose)
         model.fit(graphs)
         X = model.get_embedding()
