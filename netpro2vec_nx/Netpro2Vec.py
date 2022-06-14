@@ -85,7 +85,7 @@ class Netpro2Vec:
     """
 
 	def __init__(self, format="graphml", dimensions=128, prob_type: List[str]=["ndd"], 
-		         extractor=[1],cut_off=[0.01], agg_by=[0],
+		         extractor=[1],cut_off=[0.01], agg_by=[1],
 		         min_count=5, down_sampling=0.0001,workers=4, epochs=10, learning_rate=0.025, 
 				 remove_inf=False, vertex_attribute=None, seed=0,
 				 verbose=False,encodew=True,
