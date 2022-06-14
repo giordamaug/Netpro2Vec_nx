@@ -41,7 +41,7 @@ Netrpo2Vec.py
 The core module of Netpro2vec software.
 """
 
-class iNetpro2Vec:
+class Netpro2Vec:
 	"""The class implementation of Netpro2vec model for whole-graph embedding.
     from the IEEE TCBB '20 paper "Netpro2vec: a Graph Embedding Framework for Biological Networks". The procedure
     uses probability distribution representations of graphs and skip-gram learning modelor later.
@@ -73,23 +73,14 @@ class iNetpro2Vec:
         - extractor 2 returns multiple words of different lengths from different probability cut offs (The set of predefinied cut offs is: 0, 0.1, 0.3, 0.5).
 
         **min_count** *(int, optional)* – Ignores all words with total frequency lower than this (Doc2Vec). Default is 5
-
         **workers** *(int, optional)* – use these many worker threads to train the model (Doc2Vec). Default is 4
-
         **epochs** *(int, optional)* – Number of iterations (epochs) over the corpus (Doc2Vec). Default is 10
-
         **remove_inf** *(bool, optional)*: flag for removal of infinity value in histogram bins. Default is False.
-
         **vertex_labels** *(bool, optional)*: flag to set if graphs have vertex labels to be considered. Default is False
-
         **encodew** *(bool, optional)*: flag to unset if graph words are encoded into hash keys. Default is True
-
         **save_probs *(bool, optional)*: flag to enable probability distribution saving. Default is False
-
         **load_probs *(bool, optional)*: flag to enable probability distribution restoring. Default is False
-
         **save_vocab *(bool, optional)*: flag to enable vocabulary saving. Default is False
-
         **load_vocab *(bool, optional)*: flag to enable vocabulary restoring. Default is False
     """
 
