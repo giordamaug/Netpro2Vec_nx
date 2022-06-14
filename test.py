@@ -113,7 +113,7 @@ def main(args):
       tm6 = time.time()
       if args.select:
           clf = SVC(kernel="linear")
-          sfm = RFECV(estimator=clf, step=10, min_features_to_select=50, cv=StratifiedKFold(random_state=0,n_splits=5),scoring='accuracy')
+          sfm = RFECV(estimator=clf, step=10, min_features_to_select=50, cv=StratifiedKFold(random_state=0,shaffle=True,n_splits=5),scoring='accuracy')
           sfm = sfm.fit(X, y)
           X = sfm.transform(X)
           if args.verbose: print("Reduced dataset " + str(X.shape[1]))
