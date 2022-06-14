@@ -7,8 +7,7 @@ import sys,os
 import time
 import sys
 sys.path.append('.')
-from netpro2vec.Netpro2vec import Netpro2vec
-from netpro2vec import utils
+from netpro2vec import Netpro2vec
 import tqdm
 import csv
 
