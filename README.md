@@ -1,4 +1,4 @@
-# Netpro2vec
+# Netpro2Vec
 A graph embedding technique based on probability distribution representations of graphs and skip-gram learning model
 
 Authors: Ichcha Manipur, Maurizio Giordano, Mario Rosario Guarracino, Lucia Maddalena, Ilaria Granata - 
