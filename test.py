@@ -8,6 +8,7 @@ import time
 import sys
 sys.path.append('.')
 from netpro2vec_nx.Netpro2Vec import Netpro2Vec
+import utils
 import tqdm
 import csv
 
