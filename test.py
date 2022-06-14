@@ -74,7 +74,7 @@ def main(args):
         tm1 = time.time()
         if args.verbose: print("Embeddings...")
         tm2 = time.time()
-        model = Netpro2vec(dimensions=512, extractor=args.extractors,prob_type=args.distributions,
+        model = Netpro2Vec(dimensions=512, extractor=args.extractors,prob_type=args.distributions,
 				      cut_off=args.cutoffs, agg_by=args.aggregators,verbose=args.verbose)
         model.fit(graphs)
         X = model.get_embedding()
