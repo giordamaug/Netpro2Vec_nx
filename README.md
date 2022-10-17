@@ -24,7 +24,14 @@ Ichcha Manipur, Mario Manzo, Ilaria Granata, Maurizio Giordano*, Lucia Maddalena
 Bibtex:
 
 ```
-@ARTICLE{9425591,  author={Manipur, Ichcha and Manzo, Mario and Granata, Ilaria and Giordano, Maurizio and Maddalena, Lucia and Guarracino, Mario R.},  journal={IEEE/ACM Transactions on Computational Biology and Bioinformatics},   title={Netpro2vec: A Graph Embedding Framework for Biomedical Applications},   year={2022},  volume={19},  number={2},  pages={729-740},  doi={10.1109/TCBB.2021.3078089}}
+@ARTICLE{9425591,  author={Manipur, Ichcha and Manzo, Mario and Granata, Ilaria and Giordano, Maurizio and Maddalena, Lucia and Guarracino, Mario R.},  
+journal={IEEE/ACM Transactions on Computational Biology and Bioinformatics},   
+title={Netpro2vec: A Graph Embedding Framework for Biomedical Applications},   
+year={2022},  
+volume={19},  
+number={2},  
+pages={729-740},  
+doi={10.1109/TCBB.2021.3078089}}
 ```
 
 ----------------------
